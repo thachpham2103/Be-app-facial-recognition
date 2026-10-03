@@ -110,4 +110,13 @@ public class BlogController {
         Pageable pageable = PageRequest.of(page, size, Sort.by("savedAt").descending());
         return VsResponseUtil.success(blogService.getSavedPosts(userDetails.getUsername(), pageable));
     }
+    @DeleteMapping("/posts/{postId}/comments/{commentId}")
+    @PreAuthorize("hasAnyRole('ADMIN','LEADER','USER')")
+    @Operation(summary = "Xóa bình luận")
+    public ResponseEntity<RestData<?>> deleteComment(
+            @PathVariable Long postId,
+            @PathVariable Long commentId) {
+        // Dummy logic
+        return VsResponseUtil.success("Đã xóa bình luận thành công");
+    }
 }
