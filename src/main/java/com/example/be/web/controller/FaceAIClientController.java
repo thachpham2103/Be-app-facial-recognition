@@ -16,7 +16,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/embedding")
 @RequiredArgsConstructor
-@Tag(name="embedding")
+@Tag(name="Face A I Client  Management")
 public class FaceAIClientController {
 
     private final FaceAIClient faceAIClient;

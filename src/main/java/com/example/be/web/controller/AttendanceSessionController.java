@@ -18,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/sessions")
 @RequiredArgsConstructor
+@Tag(name="Attendance Session  Management")
 public class AttendanceSessionController {
 
     private final AttendanceSessionService sessionService;
@@ -25,7 +26,6 @@ public class AttendanceSessionController {
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "API tạo buổi điểm danh", description = "Admin / Leader")
-    @Tag(name = "admin_leader")
     public ResponseEntity<AttendanceSessionResponseDto> createSession(
             @RequestBody AttendanceSessionRequestDto requestDto) {
         AttendanceSessionResponseDto created = sessionService.createSession(requestDto);
@@ -33,8 +33,6 @@ public class AttendanceSessionController {
     }
 
     // 2. Cập nhật buổi điểm danh
-    @Tag(name = "attendanceSession")
-
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "API cập nhật buổi điểm danh", description = "Admin / Leader")
@@ -47,7 +45,6 @@ public class AttendanceSessionController {
 
 
     // 3. Xóa buổi điểm danh
-    @Tag(name = "attendanceSession")
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @DeleteMapping("/{id}")
     @Operation(summary = "API xóa buổi điểm danh theo id", description = "Admin / Leader")
@@ -74,7 +71,6 @@ public class AttendanceSessionController {
     }
 
     @GetMapping("/{sessionId}/present-count")
-    @Tag(name = "admin_leader")
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "API đếm số lượng sinh viên đã điểm danh có mặt trong buổi điểm danh", description = "Admin / Leader")
     public ResponseEntity<Long> countPresentStudentsInSession(@PathVariable Long sessionId) {
@@ -82,7 +78,6 @@ public class AttendanceSessionController {
         return ResponseEntity.ok(count);
     }
 
-    @Tag(name = "attendanceSession")
     @PreAuthorize("hasAnyRole('USER')")
     @GetMapping("/open")
     @Operation(summary = "API lấy danh sách buổi điểm danh đang mở cho sinh viên", description = "User")
@@ -91,7 +86,6 @@ public class AttendanceSessionController {
         return ResponseEntity.ok(sessions);
     }
 
-    @Tag(name = "attendanceSession")
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @GetMapping("/open/teacher")
     @Operation(summary = "API lấy buổi điểm danh đang mở cho giáo viên", description = "Leader")
@@ -100,7 +94,6 @@ public class AttendanceSessionController {
         return ResponseEntity.ok(session);
     }
 
-    @Tag(name = "attendanceSession")
     @PreAuthorize("hasAnyRole('USER','ADMIN','LEADER')")
     @GetMapping("/class/{classId}/count")
     @Operation(summary = "API đếm số buổi điểm danh của lớp học")

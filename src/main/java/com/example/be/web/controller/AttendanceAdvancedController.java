@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/attendance-advanced")
 @RequiredArgsConstructor
-@Tag(name = "Attendance Advanced", description = "API điểm danh, cảnh báo, giải trình")
+@Tag(name="Attendance Advanced  Management")
 public class AttendanceAdvancedController {
 
     private final AttendanceAdvancedService service;

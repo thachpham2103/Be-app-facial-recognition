@@ -80,11 +80,12 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void deletePost(Long id) {
+    public String deletePost(Long id) {
         BlogPost post = blogPostRepository.findByBlogPostIdAndStatusNot(id, BlogPostStatus.DELETED)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.Blog.BLOG_NOT_FOUND));
         post.setStatus(BlogPostStatus.DELETED);
         blogPostRepository.save(post);
+        return com.example.be.web.constant.ResponseMessage.DELETE_SUCCESS;
     }
 
     @Override
@@ -123,7 +124,7 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
-    public void toggleLike(Long postId, String username) {
+    public String toggleLike(Long postId, String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.User.ERR_NOT_FOUND));
 
@@ -135,10 +136,11 @@ public class BlogServiceImpl implements BlogService {
                     .orElseThrow(() -> new NotFoundException(ErrorMessage.Blog.BLOG_NOT_FOUND));
             blogLikeRepository.save(BlogLike.builder().post(post).user(user).build());
         }
+        return com.example.be.web.constant.ResponseMessage.CHANGE_STORY;
     }
 
     @Override
-    public void toggleSave(Long postId, String username) {
+    public String toggleSave(Long postId, String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new NotFoundException(ErrorMessage.User.ERR_NOT_FOUND));
 
@@ -150,6 +152,13 @@ public class BlogServiceImpl implements BlogService {
                     .orElseThrow(() -> new NotFoundException(ErrorMessage.Blog.BLOG_NOT_FOUND));
             savedPostRepository.save(SavedPost.builder().user(user).post(post).build());
         }
+        return "Đã thay đổi trạng thái lưu";
+    }
+
+    @Override
+    public String deleteComment(Long postId, Long commentId) {
+        // Dummy logic
+        return "Xóa thành công!!";
     }
 
     @Override

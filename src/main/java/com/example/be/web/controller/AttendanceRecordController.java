@@ -5,6 +5,7 @@ import com.example.be.web.doman.dto.response.facedata.FaceResponse;
 import com.example.be.web.doman.dto.response.attendance.StudentAttendanceStatsResponseDto;
 import com.example.be.web.service.AttendanceRecordService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.MediaType;
@@ -18,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/attendance")
 @RequiredArgsConstructor
+@Tag(name="Attendance Record  Management")
 public class AttendanceRecordController {
 
     private final AttendanceRecordService attendanceRecordService;

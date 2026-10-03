@@ -18,7 +18,7 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/v1/files")
 @RequiredArgsConstructor
-@Tag(name = "File Upload", description = "API cho upload file")
+@Tag(name="File Upload  Management")
 public class FileUploadController {
 
     private final Cloudinary cloudinary;

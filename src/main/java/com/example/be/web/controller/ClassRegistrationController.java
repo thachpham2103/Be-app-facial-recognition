@@ -25,10 +25,10 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/class-registrations")
 @RequiredArgsConstructor
+@Tag(name="Class Registration  Management")
 public class ClassRegistrationController {
     private final ClassRegistrationService classRegistrationService;
 
-    @Tag(name = "Class Registration")
     @PreAuthorize("hasAnyRole('USER')")
     @PostMapping
     @Operation(summary = "API register class", description = "User")
@@ -39,7 +39,6 @@ public class ClassRegistrationController {
         return ResponseEntity.ok(responseDto);
     }
 
-    @Tag(name = "Class Registration")
     @PutMapping("/{registrationId}")
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "API update registration status", description = "Admin / Leader")
@@ -51,7 +50,6 @@ public class ClassRegistrationController {
         return ResponseEntity.ok(responseDto);
     }
 
-    @Tag(name = "Class Registration")
     @DeleteMapping("/{registrationId}")
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "API delete registration", description = "Admin / Leader")
@@ -60,7 +58,6 @@ public class ClassRegistrationController {
         return ResponseEntity.noContent().build();
     }
 
-    @Tag(name = "Class Registration")
     @GetMapping("/{studentId}/classes")
     @PreAuthorize("hasAnyRole('USER')")
     @Operation(summary = "lấy danh sách lớp đã đăng ký của sinh viên", description = "User")
@@ -72,7 +69,6 @@ public class ClassRegistrationController {
         return classRegistrationService.getByStudentId(pageable, studentId);
     }
 
-    @Tag(name = "Class Registration")
     @GetMapping("/{classId}/students")
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "lấy danh sách sinh viên đã đăng ký của lớp học", description = "Admin / Leader")
@@ -84,7 +80,6 @@ public class ClassRegistrationController {
         return classRegistrationService.getByClassId(pageable, classId);
     }
 
-    @Tag(name = "class-registration-MEMBER-controller")
     @Operation(summary = "View the registered classes", description = "Member")
     @GetMapping("/registration/view")
     @PreAuthorize("hasRole('USER')")
@@ -97,7 +92,6 @@ public class ClassRegistrationController {
         }
     }
 
-    @Tag(name = "Class Registration")
     @GetMapping("/{classId}/students/status")
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "lấy danh sách sinh viên đã đăng ký của lớp học theo trạng thái đăng ký", description = "Admin / Leader")

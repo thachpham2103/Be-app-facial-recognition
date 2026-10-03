@@ -11,12 +11,13 @@ public interface BlogService {
     BlogPostResponseDto createPost(BlogPostRequestDto dto, String username);
     Page<BlogPostResponseDto> getPosts(Pageable pageable);
     BlogPostResponseDto getPost(Long id);
-    void deletePost(Long id);
+    String deletePost(Long id);
 
     BlogCommentResponseDto addComment(Long postId, BlogCommentRequestDto dto, String username);
     Page<BlogCommentResponseDto> getComments(Long postId, Pageable pageable);
 
-    void toggleLike(Long postId, String username);
-    void toggleSave(Long postId, String username);
+    String toggleLike(Long postId, String username);
+    String toggleSave(Long postId, String username);
+    String deleteComment(Long postId, Long commentId);
     Page<BlogPostResponseDto> getSavedPosts(String username, Pageable pageable);
 }

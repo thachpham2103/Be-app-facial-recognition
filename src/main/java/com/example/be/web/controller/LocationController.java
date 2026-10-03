@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/locations")
 @RequiredArgsConstructor
-@Tag(name = "Location")
+@Tag(name="Location  Management")
 public class LocationController {
 
     private final LocationService locationService;

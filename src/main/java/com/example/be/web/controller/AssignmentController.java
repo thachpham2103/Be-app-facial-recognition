@@ -27,7 +27,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/assignments")
 @RequiredArgsConstructor
-@Tag(name = "Assignment", description = "API quản lý bài tập và bài nộp")
+@Tag(name="Assignment  Management")
 public class AssignmentController {
 
     private final AssignmentService assignmentService;

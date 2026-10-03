@@ -19,6 +19,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/classrooms")
 @RequiredArgsConstructor
+@Tag(name="Class Room  Management")
 public class ClassRoomController {
 
     private final ClassRoomService classRoomService;
@@ -37,7 +38,6 @@ public class ClassRoomController {
     }
 
     // Lấy chi tiết classroom theo id
-    @Tag(name="classRoom")
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('USER','ADMIN','LEADER')")
     @Operation(summary = "API get classroom by id", description = "Admin / Leader")
@@ -46,7 +46,6 @@ public class ClassRoomController {
     }
 
     // Tạo mới classroom
-    @Tag(name="classRoom")
     @PostMapping
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "API create new classroom", description = "Admin / Leader")
@@ -55,7 +54,6 @@ public class ClassRoomController {
     }
 
     // Cập nhật classroom theo id
-    @Tag(name="classRoom")
     @PutMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "API update classroom by id", description = "Admin / Leader")
@@ -70,7 +68,6 @@ public class ClassRoomController {
      *
      * @param id xóa lơp học theo id
      */
-    @Tag(name="classRoom")
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "API delete classroom by id", description = "Admin / Leader")
@@ -78,7 +75,6 @@ public class ClassRoomController {
         classRoomService.deleteClassRoom(id);
     }
 
-    @Tag(name="classRoom")
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @GetMapping("/{classId}/attendance/stats")
     @Operation(summary = "API thống kê điểm danh theo buổi của lớp học", description = "Admin / Leader")
@@ -88,7 +84,6 @@ public class ClassRoomController {
     }
 
     // Đếm tổng số sinh viên đã đăng ký trong lớp học
-    @Tag(name="classRoom")
     @GetMapping("/{classId}/totalStudent")
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "API lấy tổng số sinh viên của lớp học", description = "Admin / Leader")

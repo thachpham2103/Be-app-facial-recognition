@@ -20,11 +20,11 @@ import org.springframework.web.bind.annotation.*;
 @RestApiV1
 @Validated
 
+@Tag(name="User  Management")
 public class UserController {
 
     private final UserService userService;
 
-    @Tag(name="User_Controller")
     @Operation(summary = "Get user by id", description = "Admin / Leader")
     @GetMapping("/{userId}")
     public ResponseEntity<?> getUserById(@PathVariable Long userId){
@@ -32,14 +32,12 @@ public class UserController {
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'LEADER')")
-    @Tag(name="User_Controller")
     @Operation(summary = "create users")
     @PostMapping(UrlConstant.User.CREATE_USER)
     public ResponseEntity<?> createUser(@RequestBody @Valid UserCreateDto createDto){
         return VsResponseUtil.success(userService.createUser(createDto));
     }
 
-    @Tag(name="User_Controller")
     @DeleteMapping(UrlConstant.User.DELETE_USER)
     @Operation(summary = "Delete user by id", description = "Admin / Leader")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Long id) {

@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/tasks")
 @RequiredArgsConstructor
-@Tag(name = "Learning Task", description = "API quản lý nhiệm vụ học tập")
+@Tag(name="Learning Task  Management")
 public class LearningTaskController {
 
     private final LearningTaskService learningTaskService;

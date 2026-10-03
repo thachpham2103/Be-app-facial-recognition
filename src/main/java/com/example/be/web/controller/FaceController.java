@@ -18,7 +18,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/face")
 @RequiredArgsConstructor
-@Tag(name="FaceController")
+@Tag(name="Face  Management")
 public class FaceController {
 
     private final FaceService faceService;

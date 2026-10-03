@@ -9,6 +9,7 @@ import com.example.be.web.doman.dto.request.auth.TokenRefreshRequestDto;
 import com.example.be.web.doman.dto.response.auth.JwtResponse;
 import com.example.be.web.service.AuthService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @Validated
 @RequestMapping("/auth")
+@Tag(name="Auth  Management")
 public class  AuthController {
 
     private final AuthService authService;

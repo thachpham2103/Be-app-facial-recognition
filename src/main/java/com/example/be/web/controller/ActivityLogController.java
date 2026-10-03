@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/activity-logs")
 @RequiredArgsConstructor
-@Tag(name = "Activity Log", description = "API nhật ký hoạt động hệ thống")
+@Tag(name="Activity Log  Management")
 public class ActivityLogController {
 
     private final ActivityLogService activityLogService;

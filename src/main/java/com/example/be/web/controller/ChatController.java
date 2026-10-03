@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/chat")
 @RequiredArgsConstructor
-@Tag(name = "Chat", description = "API quản lý cuộc hội thoại và tin nhắn")
+@Tag(name="Chat  Management")
 public class ChatController {
 
     private final ChatService chatService;

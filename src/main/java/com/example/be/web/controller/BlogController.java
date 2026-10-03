@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdoc.api.ErrorMessage;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -23,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/blog")
 @RequiredArgsConstructor
-@Tag(name = "Blog", description = "API quản lý bài viết blog")
+@Tag(name="Blog  Management")
 public class BlogController {
 
     private final BlogService blogService;
@@ -56,8 +57,7 @@ public class BlogController {
     @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "Xóa mềm bài viết")
     public ResponseEntity<RestData<?>> deletePost(@PathVariable Long id) {
-        blogService.deletePost(id);
-        return VsResponseUtil.success(ResponseMessage.DELETE_SUCCESS);
+        return VsResponseUtil.success(blogService.deletePost(id));
     }
 
     @PostMapping("/posts/{postId}/comments")
@@ -86,8 +86,7 @@ public class BlogController {
     public ResponseEntity<RestData<?>> toggleLike(
             @PathVariable Long postId,
             @AuthenticationPrincipal UserDetails userDetails) {
-        blogService.toggleLike(postId, userDetails.getUsername());
-        return VsResponseUtil.success(ResponseMessage.CHANGE_STORY);
+        return VsResponseUtil.success(blogService.toggleLike(postId, userDetails.getUsername()));
     }
 
     @PostMapping("/posts/{postId}/save")
@@ -96,8 +95,7 @@ public class BlogController {
     public ResponseEntity<RestData<?>> toggleSave(
             @PathVariable Long postId,
             @AuthenticationPrincipal UserDetails userDetails) {
-        blogService.toggleSave(postId, userDetails.getUsername());
-        return VsResponseUtil.success("Đã thay đổi trạng thái lưu");
+        return VsResponseUtil.success(blogService.toggleSave(postId, userDetails.getUsername()));
     }
 
     @GetMapping("/saved")
@@ -116,7 +114,6 @@ public class BlogController {
     public ResponseEntity<RestData<?>> deleteComment(
             @PathVariable Long postId,
             @PathVariable Long commentId) {
-        // Dummy logic
-        return VsResponseUtil.success("Đã xóa bình luận thành công");
+        return VsResponseUtil.success(blogService.deleteComment(postId, commentId));
     }
 }
