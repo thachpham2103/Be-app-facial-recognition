@@ -1,7 +1,5 @@
 package com.example.be.web.constant;
 
-import org.hibernate.boot.cfgxml.internal.CfgXmlAccessServiceImpl;
-
 public class ErrorMessage {
     public static final String INVALID_SOME_THING_FIELD_IS_REQUIRED = "invalid.general.required";
     public static final String INVALID_FORMAT_PASSWORD = "invalid.password-format";
@@ -29,6 +27,12 @@ public class ErrorMessage {
 
         public static final String INVALID_REFRESH_TOKEN = "exception.auth.invalid.refresh.token";
         public static final String ERR_INCORRECT_USERNAME = "exception.auth.incorrect.username";
+        public static final String CURRENT_PASSWORD_INCORRECT = "Current password is incorrect";
+        public static final String PASSWORD_TOO_LONG = "Password must be at most 72 UTF-8 bytes";
+    }
+
+    public static class FileUpload {
+        public static final String UPLOAD_FAILED_PREFIX = "Lỗi upload file: ";
     }
 
     public static class AttendanceSession {
@@ -99,11 +103,13 @@ public class ErrorMessage {
         public static final String APPEAL_NOT_FOUND = "exception.attendance.appeal.not.found";
         public static final String APPEAL_ALREADY_EXISTS = "error.attendance.appeal.already.exists";
         public static final String APPEAL_ALREADY_REVIEWED = "error.attendance.appeal.already.reviewed";
-        public static final String NO_SEND_ATTENDANCE = "error.no-send-attendance";}
-        public static final String NO_PERMISSION_UPDATE_APPEAL = "error.no-permission-update-appeal";
-        public static final String ONLY_UPDATE_PENDING_APPEAL ="error.only-update-pending-appeal";
-        public static final String NO_PERMISSION_DELETE_APPEAL ="error.no-permission-delete-appeal";
-         public static final String ONLY_DELETE_PENDING_APPEAL = "error.only-delete-pending-appeal";
+        public static final String NO_SEND_ATTENDANCE = "error.no-send-attendance";
+    }
+
+    public static final String NO_PERMISSION_UPDATE_APPEAL = "error.no-permission-update-appeal";
+    public static final String ONLY_UPDATE_PENDING_APPEAL = "error.only-update-pending-appeal";
+    public static final String NO_PERMISSION_DELETE_APPEAL = "error.no-permission-delete-appeal";
+    public static final String ONLY_DELETE_PENDING_APPEAL = "error.only-delete-pending-appeal";
 
     public static class Payment {
         public static final String PAYMENT_NOT_FOUND = "exception.payment.not.found";
@@ -120,7 +126,7 @@ public class ErrorMessage {
         public static final String PAYMENT_NOT_AWAITING_REVIEW = "error.payment-not-awaiting-review";
         public static final String NO_PERMISSION_REVIEW_PAYMENT = "error.no-permission-review-payment";
         public static final String NO_PERMISSION_VIEW_PAYMENT = "error.no-permission-view-payment";
-        }
+    }
 
     public static class LearningTask{
         public static final String TASK_NOT_FOUND="exception.task.not.found";

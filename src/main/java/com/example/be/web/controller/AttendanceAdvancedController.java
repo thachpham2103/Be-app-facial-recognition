@@ -2,6 +2,7 @@ package com.example.be.web.controller;
 
 import com.example.be.web.base.RestData;
 import com.example.be.web.base.VsResponseUtil;
+import com.example.be.web.constant.ResponseMessage;
 import com.example.be.web.doman.dto.request.attendance.AttendanceAppealRequestDto;
 import com.example.be.web.doman.dto.request.attendance.AttendancePolicyRequestDto;
 import com.example.be.web.doman.dto.request.attendance.ReviewAppealRequestDto;
@@ -86,7 +87,7 @@ public class AttendanceAdvancedController {
     @Operation(summary = "Xóa Policy điểm danh", description = "ADMIN")
     public ResponseEntity<RestData<?>> deletePolicy(@PathVariable Long id) {
         service.deletePolicy(id);
-        return VsResponseUtil.success("Đã xóa chính sách điểm danh");
+        return VsResponseUtil.success(ResponseMessage.AttendanceAdvanced.DELETE_POLICY_SUCCESS);
     }
 
     // ======================== WARNING ========================
@@ -173,7 +174,7 @@ public class AttendanceAdvancedController {
     @Operation(summary = "Xóa cảnh báo", description = "ADMIN / LEADER")
     public ResponseEntity<RestData<?>> deleteWarning(@PathVariable Long id) {
         service.deleteWarning(id);
-        return VsResponseUtil.success("Đã xóa cảnh báo");
+        return VsResponseUtil.success(ResponseMessage.AttendanceAdvanced.DELETE_WARNING_SUCCESS);
     }
 
     // ======================== APPEAL ========================
@@ -255,7 +256,7 @@ public class AttendanceAdvancedController {
     @Operation(summary = "Xóa giải trình", description = "Sinh viên xóa khi PENDING")
     public ResponseEntity<RestData<?>> deleteAppeal(@PathVariable Long id) {
         service.deleteAppeal(id);
-        return VsResponseUtil.success("Đã xóa giải trình thành công");
+        return VsResponseUtil.success(ResponseMessage.AttendanceAdvanced.DELETE_APPEAL_SUCCESS);
     }
 
     @GetMapping("/appeals/search")

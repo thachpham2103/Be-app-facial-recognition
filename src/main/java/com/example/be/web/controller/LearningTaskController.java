@@ -2,6 +2,7 @@ package com.example.be.web.controller;
 
 import com.example.be.web.base.RestData;
 import com.example.be.web.base.VsResponseUtil;
+import com.example.be.web.constant.ResponseMessage;
 import com.example.be.web.doman.dto.request.task.LearningTaskRequestDto;
 import com.example.be.web.doman.model.TaskProgressStatus;
 import com.example.be.web.service.LearningTaskService;
@@ -59,7 +60,7 @@ public class LearningTaskController {
     @Operation(summary = "Hủy nhiệm vụ")
     public ResponseEntity<RestData<?>> cancelTask(@PathVariable Long taskId) {
         learningTaskService.cancelTask(taskId);
-        return VsResponseUtil.success("Đã hủy nhiệm vụ");
+        return VsResponseUtil.success(ResponseMessage.LearningTask.CANCEL_SUCCESS);
     }
 
     @GetMapping("/{taskId}/progress")

@@ -162,7 +162,7 @@ public class PaymentServiceImpl implements PaymentService {
 
             throw new BadRequestException(
                     ErrorMessage.Payment.PAYMENT_PROOF_NOT_FOUND
-            );
+         );
         }
 
         payment.setPaymentStatus(PaymentStatus.CONFIRMED);

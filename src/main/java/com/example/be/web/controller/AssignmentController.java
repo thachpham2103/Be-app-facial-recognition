@@ -195,7 +195,7 @@ public class AssignmentController {
     @Operation(summary = "Xóa bài nộp", description = "Chỉ chủ sở hữu")
     public ResponseEntity<RestData<?>> deleteSubmission(@PathVariable Long submissionId) {
         assignmentService.deleteSubmission(submissionId);
-        return VsResponseUtil.success("Đã xóa bài nộp thành công");
+        return VsResponseUtil.success(ResponseMessage.Assignment.DELETE_SUBMISSION_SUCCESS);
     }
 
     /**

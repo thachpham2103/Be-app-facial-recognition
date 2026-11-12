@@ -4,6 +4,7 @@ import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.example.be.web.base.RestData;
 import com.example.be.web.base.VsResponseUtil;
+import com.example.be.web.constant.ErrorMessage;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +28,12 @@ public class FileUploadController {
     @Operation(summary = "Upload a file")
     public ResponseEntity<RestData<?>> uploadFile(@RequestParam("file") MultipartFile file) {
         try {
-            Map uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+            Map<?, ?> uploadResult = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
             String fileUrl = uploadResult.get("secure_url").toString();
 
             return VsResponseUtil.success(fileUrl);
         } catch (IOException ex) {
-            return ResponseEntity.internalServerError().body(new RestData<>("Lỗi upload file: " + ex.getMessage()));
+            return ResponseEntity.internalServerError().body(new RestData<>(ErrorMessage.FileUpload.UPLOAD_FAILED_PREFIX + ex.getMessage()));
         }
     }
 }

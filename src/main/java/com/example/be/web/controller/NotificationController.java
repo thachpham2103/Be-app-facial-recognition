@@ -2,6 +2,7 @@ package com.example.be.web.controller;
 
 import com.example.be.web.base.RestData;
 import com.example.be.web.base.VsResponseUtil;
+import com.example.be.web.constant.ResponseMessage;
 import com.example.be.web.doman.dto.request.notification.NotificationTemplateRequestDto;
 import com.example.be.web.service.NotificationService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -50,7 +51,7 @@ public class NotificationController {
     @Operation(summary = "Đánh dấu thông báo đã đọc")
     public ResponseEntity<RestData<?>> markAsRead(@PathVariable Long notifId) {
         notificationService.markAsRead(notifId);
-        return VsResponseUtil.success("Đã đánh dấu đọc");
+        return VsResponseUtil.success(ResponseMessage.MARK_AS_READ_SUCCESS);
     }
 
     @DeleteMapping("/{notifId}")
@@ -60,7 +61,7 @@ public class NotificationController {
             @AuthenticationPrincipal UserDetails userDetails,
             @PathVariable Long notifId) {
         notificationService.deleteNotification(notifId, userDetails.getUsername());
-        return VsResponseUtil.success("Đã xóa thông báo");
+        return VsResponseUtil.success(ResponseMessage.Notification.DELETE_SUCCESS);
     }
 
     @GetMapping("/search")
@@ -82,7 +83,7 @@ public class NotificationController {
             @AuthenticationPrincipal UserDetails userDetails,
             @Valid @RequestBody com.example.be.web.doman.dto.request.notification.NotificationSendRequestDto dto) {
         notificationService.sendNotification(dto, userDetails.getUsername());
-        return VsResponseUtil.success(HttpStatus.CREATED, "Đã gửi thông báo");
+        return VsResponseUtil.success(HttpStatus.CREATED, ResponseMessage.Notification.SEND_SUCCESS);
     }
 
     @GetMapping("/sent")
@@ -104,7 +105,7 @@ public class NotificationController {
             @PathVariable Long notifId,
             @Valid @RequestBody com.example.be.web.doman.dto.request.notification.NotificationSendRequestDto dto) {
         notificationService.updateSentNotification(notifId, dto, userDetails.getUsername());
-        return VsResponseUtil.success("Đã cập nhật thông báo");
+        return VsResponseUtil.success(ResponseMessage.Notification.UPDATE_SUCCESS);
     }
 
     @DeleteMapping("/sent/{notifId}")
@@ -114,11 +115,12 @@ public class NotificationController {
             @AuthenticationPrincipal UserDetails userDetails,
             @PathVariable Long notifId) {
         notificationService.deleteSentNotification(notifId, userDetails.getUsername());
-        return VsResponseUtil.success("Đã xóa thông báo");
+        return VsResponseUtil.success(ResponseMessage.Notification.DELETE_SUCCESS);
     }
 
+    // --- FIX: Mở quyền cho LEADER (teacher) tạo/xem/sửa/xóa template ---
     @PostMapping("/templates")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "Tạo template thông báo")
     public ResponseEntity<RestData<?>> createTemplate(
             @Valid @RequestBody NotificationTemplateRequestDto dto) {
@@ -126,14 +128,14 @@ public class NotificationController {
     }
 
     @GetMapping("/templates")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "Lấy danh sách template thông báo")
     public ResponseEntity<RestData<?>> getTemplates() {
         return VsResponseUtil.success(notificationService.getTemplates());
     }
 
     @PutMapping("/templates/{templateId}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "Cập nhật template thông báo")
     public ResponseEntity<RestData<?>> updateTemplate(
             @PathVariable Long templateId,
@@ -142,10 +144,10 @@ public class NotificationController {
     }
 
     @DeleteMapping("/templates/{templateId}")
-    @PreAuthorize("hasAnyRole('ADMIN')")
+    @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "Vô hiệu hóa template")
     public ResponseEntity<RestData<?>> deactivateTemplate(@PathVariable Long templateId) {
         notificationService.deactivateTemplate(templateId);
-        return VsResponseUtil.success("Đã vô hiệu hóa template");
+        return VsResponseUtil.success(ResponseMessage.Notification.DEACTIVATE_TEMPLATE_SUCCESS);
     }
 }

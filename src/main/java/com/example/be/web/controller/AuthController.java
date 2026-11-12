@@ -1,6 +1,7 @@
 package com.example.be.web.controller;
 
 import com.example.be.web.base.VsResponseUtil;
+import com.example.be.web.constant.ResponseMessage;
 import com.example.be.web.constant.UrlConstant;
 import com.example.be.web.doman.dto.request.auth.LoginRequest;
 import com.example.be.web.doman.dto.request.auth.LoginRequestDto;
@@ -43,6 +44,6 @@ public class  AuthController {
     @PostMapping("/change-password")
     public ResponseEntity<?> changePassword(@RequestBody java.util.Map<String, String> request) {
         // Dummy implementation for compilation
-        return VsResponseUtil.success("Đổi mật khẩu thành công");
+        return VsResponseUtil.success(ResponseMessage.CHANGE_PASSWORD_SUCCESS);
     }
 }

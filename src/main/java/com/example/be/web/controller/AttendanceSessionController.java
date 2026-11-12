@@ -98,7 +98,7 @@ public class AttendanceSessionController {
     @GetMapping("/class/{classId}/count")
     @Operation(summary = "API đếm số buổi điểm danh của lớp học")
     public ResponseEntity<Long> countSessionsByClassId(@PathVariable Long classId) {
-            long count = sessionService.countSessionsByClassId(classId);
-            return ResponseEntity.ok(count);
-        }
+        long count = sessionService.countSessionsByClassId(classId);
+        return ResponseEntity.ok(count);
+    }
 }

@@ -2,6 +2,7 @@ package com.example.be.web.controller;
 
 import com.example.be.web.base.RestData;
 import com.example.be.web.base.VsResponseUtil;
+import com.example.be.web.constant.ResponseMessage;
 import com.example.be.web.doman.dto.request.chat.ConversationRequestDto;
 import com.example.be.web.doman.dto.request.chat.MessageRequestDto;
 import com.example.be.web.service.ChatService;
@@ -76,7 +77,7 @@ public class ChatController {
     @Operation(summary = "Xóa mềm tin nhắn")
     public ResponseEntity<RestData<?>> deleteMessage(@PathVariable Long messageId) {
         chatService.deleteMessage(messageId);
-        return VsResponseUtil.success("Đã xóa tin nhắn");
+        return VsResponseUtil.success(ResponseMessage.Chat.DELETE_MESSAGE_SUCCESS);
     }
 
     @PostMapping("/messages/{messageId}/read")
@@ -86,7 +87,7 @@ public class ChatController {
             @PathVariable Long messageId,
             @AuthenticationPrincipal UserDetails userDetails) {
         chatService.markAsRead(messageId, userDetails.getUsername());
-        return VsResponseUtil.success("Đã đánh dấu đọc");
+        return VsResponseUtil.success(ResponseMessage.MARK_AS_READ_SUCCESS);
     }
 
     @PostMapping("/conversations/{convoId}/pin/{messageId}")
@@ -97,7 +98,7 @@ public class ChatController {
             @PathVariable Long messageId,
             @AuthenticationPrincipal UserDetails userDetails) {
         chatService.togglePin(convoId, messageId, userDetails.getUsername());
-        return VsResponseUtil.success("Đã thay đổi trạng thái ghim");
+        return VsResponseUtil.success(ResponseMessage.Chat.TOGGLE_PIN_SUCCESS);
     }
 
     @GetMapping("/conversations/{convoId}/pinned")
@@ -121,7 +122,7 @@ public class ChatController {
             @PathVariable Long convoId,
             @AuthenticationPrincipal UserDetails userDetails) {
         chatService.requestJoinGroup(convoId, userDetails.getUsername());
-        return VsResponseUtil.success(HttpStatus.CREATED, "Đã gửi yêu cầu tham gia nhóm");
+        return VsResponseUtil.success(HttpStatus.CREATED, ResponseMessage.Chat.JOIN_REQUEST_SENT);
     }
 
     @GetMapping("/conversations/join-requests/pending")
@@ -138,7 +139,7 @@ public class ChatController {
             @PathVariable Long requestId,
             @AuthenticationPrincipal UserDetails userDetails) {
         chatService.approveJoinRequest(requestId, userDetails.getUsername());
-        return VsResponseUtil.success("Đã duyệt yêu cầu");
+        return VsResponseUtil.success(ResponseMessage.Chat.JOIN_REQUEST_APPROVED);
     }
 
     @PostMapping("/conversations/join-requests/{requestId}/reject")
@@ -148,6 +149,6 @@ public class ChatController {
             @PathVariable Long requestId,
             @AuthenticationPrincipal UserDetails userDetails) {
         chatService.rejectJoinRequest(requestId, userDetails.getUsername());
-        return VsResponseUtil.success("Đã từ chối yêu cầu");
+        return VsResponseUtil.success(ResponseMessage.Chat.JOIN_REQUEST_REJECTED);
     }
 }
