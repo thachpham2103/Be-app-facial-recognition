@@ -24,9 +24,6 @@ public class ClassRoomController {
 
     private final ClassRoomService classRoomService;
 
-    // Lấy danh sách classrooms (phân trang)
-
-
     @GetMapping
 //    @PreAuthorize("hasAnyRole('ADMIN','LEADER')")
     @Operation(summary = "API get all classrooms with pagination", description = "Admin / Leader")
